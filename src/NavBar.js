@@ -8,6 +8,7 @@ import {
   ActionButtons,
 } from "./Navbar.styles";
 import DropdownContent from "./DropdownContent"; // Import DropdownContent
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -23,7 +24,8 @@ const Navbar = () => {
         <NavLink>Home Page</NavLink>
         <NavLink>About Us</NavLink>
         <NavLink>Get Involved</NavLink>
-        <NavLink onMouseEnter={toggleDropdown} onMouseLeave={toggleDropdown}>
+        <NavLink as={Link} style={{ textDecoration: 'none', color: 'inherit' }} to ='/resumeanalyzer'>Resume Analyzer</NavLink>
+        <NavLink  onMouseEnter={toggleDropdown} onMouseLeave={toggleDropdown}>
           More Links
           {isDropdownOpen && (
             <Dropdown>
