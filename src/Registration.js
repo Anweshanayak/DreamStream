@@ -7,6 +7,9 @@ function Registration() {
     confirmPassword: "",
   });
 
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -36,27 +39,6 @@ function Registration() {
         }}
       >
         <h2 className="text-center mb-4">Registration</h2>
-        <div className="d-flex justify-content-center mb-4">
-          {/* Progress Bar */}
-          <div className="d-flex gap-3">
-            {[1, 2, 3, 4].map((step, index) => (
-              <div
-                key={index}
-                className={`rounded-circle text-center ${
-                  step === 1 ? "bg-success text-white" : "text-muted"
-                }`}
-                style={{
-                  width: "30px",
-                  height: "30px",
-                  lineHeight: "30px",
-                  border: "1px solid #00A676",
-                }}
-              >
-                {step}
-              </div>
-            ))}
-          </div>
-        </div>
         <form onSubmit={handleSubmit}>
           <div className="form-group mb-4">
             <label htmlFor="email" className="form-label">
@@ -77,38 +59,62 @@ function Registration() {
             <label htmlFor="password" className="form-label">
               Password<span className="text-danger">*</span>
             </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              className="form-control"
-              placeholder="Enter your password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
+            <div className="input-group">
+              <input
+                type={passwordVisible ? "text" : "password"}
+                id="password"
+                name="password"
+                className="form-control"
+                placeholder="Enter your password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                data-testid="password-input"
+              />
+              <span
+                className="input-group-text"
+                style={{ cursor: "pointer" }}
+                onClick={() => setPasswordVisible(!passwordVisible)}
+                data-testid="password-toggle"
+              >
+                {passwordVisible ? "👁️" : "👁️‍🗨️"}
+              </span>
+            </div>
           </div>
           <div className="form-group mb-4">
             <label htmlFor="confirmPassword" className="form-label">
               Confirm Password<span className="text-danger">*</span>
             </label>
-            <input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              className="form-control"
-              placeholder="Confirm your password"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              required
-            />
+            <div className="input-group">
+              <input
+                type={confirmPasswordVisible ? "text" : "password"}
+                id="confirmPassword"
+                name="confirmPassword"
+                className="form-control"
+                placeholder="Confirm your password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+                data-testid="confirm-password-input"
+              />
+              <span
+                className="input-group-text"
+                style={{ cursor: "pointer" }}
+                onClick={() =>
+                  setConfirmPasswordVisible(!confirmPasswordVisible)
+                }
+                data-testid="confirm-password-toggle"
+              >
+                {confirmPasswordVisible ? "👁️" : "👁️‍🗨️"}
+              </span>
+            </div>
           </div>
           <button
             type="submit"
             className="btn btn-success w-100"
             style={{ borderRadius: "8px", height: "48px" }}
           >
-            Log in
+            Register
           </button>
         </form>
         <div className="text-center mt-3">

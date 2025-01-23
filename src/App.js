@@ -6,6 +6,7 @@ import About from './About';
 import OfferLetterGenerator from './OfferLetterGenerator';
 import Login from './Login';
 import Registration from './Registration';
+import Dashboard from './Dashboard';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/offerlettergenerator" element={<OfferLetterGenerator />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Registration />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
   );
