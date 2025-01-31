@@ -1,51 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Navbar from "./HR/NavBar";
+
 
 function Dashboard() {
   return (
     <div className="container-fluid">
-      {/* Navbar */}
-      <nav
-        className="navbar navbar-expand-lg navbar-light bg-light"
-        style={{
-          borderBottom: "1px solid #ECEEF0",
-          padding: "10px 20px",
-        }}
-      >
-        <div className="container-fluid">
-          <Link className="navbar-brand" to="/">
-            Logo
-          </Link>
-          <div className="collapse navbar-collapse">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <Link className="nav-link" to="/dashboard">
-                  Dashboard
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/resume-analyzer">
-                  Resume Analyzer
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/offerlettergenerator">
-                  Offer Letter Generator
-                </Link>
-              </li>
-            </ul>
-            <div className="d-flex align-items-center">
-              <img
-                src="https://via.placeholder.com/40"
-                alt="User Avatar"
-                className="rounded-circle"
-                style={{ marginRight: "10px" }}
-              />
-              <span>Konstantin Konstantinopolisky</span>
-            </div>
-          </div>
-        </div>
-      </nav>
+      {/* Use the Navbar component */}
+      <Navbar />
 
       {/* Main Layout */}
       <div className="row" style={{ marginTop: "20px" }}>

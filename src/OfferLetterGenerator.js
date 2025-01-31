@@ -1,49 +1,53 @@
 import React, { useState } from 'react';
+import Navbar from './HR/NavBar';
 
 function OfferLetterGenerator() {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     offerType: 'Employment Offer',
-    companyName: '',
-    companyAddress: '',
-    companyWebsite: '',
-    employeeName: '',
-    employeeAddress: '',
-    designation: '',
     email: '',
-    salary: '',
-    joiningDate: '',
+    volunteerName: '',
+    volunteerEmail: '',
+    project: '',
+    startDate: '',
+    endDate: '',
+    workingHours: '',
+    projectManagement: '',
+    additionalInformation: '',
   });
 
   const templates = {
     employment: `
-      Company Name: [${formData.companyName}]
-    Website: [${formData.companyWebsite}]
-    Address: [${formData.companyAddress}]
-    Employee Name: [${formData.employeeName}]
-    Designation: [${formData.designation}]
-    Joining Date: [${formData.joiningDate}]
+      Volunteer Name: ${formData.volunteerName}
+      Volunteer Email: ${formData.volunteerEmail}
+      Project: ${formData.project}
+      Start Date: ${formData.startDate}
+      End Date: ${formData.endDate}
+      Working Hours: ${formData.workingHours}
+      Project Management: ${formData.projectManagement}
+      Additional Information: ${formData.additionalInformation}
 
-    Dear [${formData.employeeName}],
+      Dear ${formData.volunteerName},
 
-    We are thrilled to extend an offer of employment to you at [${formData.companyName}] for the position of [${formData.designation}]. Your performance during the interview process has impressed us, and we believe you will be a valuable addition to our team.
+      We are thrilled to extend an offer for you to join us as a volunteer for the project ${formData.project}. Your contribution will be invaluable to our team.
 
-    Your Compensation Package:
+      Project Details:
 
-    Your Total Compensation (CTC) for the year will be Rs. [${formData.salary}]. This includes a Fixed Salary Component of Rs. [${formData.salaryFixed}] per annum and a Variable Component of Rs. [${formData.salaryVariable}] per annum (Performance-Based).
+      - Start Date: ${formData.startDate}
+      - End Date: ${formData.endDate}
+      - Working Hours: ${formData.workingHours}
+      - Project Management: ${formData.projectManagement}
+      - Additional Information: ${formData.additionalInformation}
 
-    In addition, you may be eligible for benefits such as Mobile, Internet, and Local Conveyance, as per company policy, depending on your role and nature of work.
+      We look forward to working with you. Please let us know if you have any questions or need further clarification.
 
-    We look forward to welcoming you to our team. Please let us know if you have any questions or need further clarification.
-
-    Best Regards,
-    [${formData.companyName}]
+      Best Regards,
+      [Your Organization]
     `,
-    // Additional templates for other offer types can be added here
   };
 
   const handleNext = () => {
-    if (step < 4) setStep(step + 1);
+    if (step < 3) setStep(step + 1);
   };
 
   const handleBack = () => {
@@ -64,86 +68,207 @@ function OfferLetterGenerator() {
   };
 
   return (
+    <>
+    <Navbar/>
     <div style={{ display: 'flex', fontFamily: 'Arial, sans-serif', padding: '2rem' }}>
       {/* Left Section - Form */}
       <div style={{ flex: 1, borderRight: '1px solid #ddd', paddingRight: '2rem' }}>
-        <h2>Offer Letter Generator</h2>
+        <h2 style={{ marginBottom: '1rem' }}>Offer Letter Generator</h2>
+
+        {/* Progress Stepper */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '2rem' }}>
+          <div
+            style={{
+              padding: '0.5rem',
+              borderRadius: '50%',
+              width: '30px',
+              height: '30px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: step >= 1 ? '#00b894' : '#ddd',
+              color: step >= 1 ? 'white' : '#333',
+            }}
+          >
+            1
+          </div>
+          <div
+            style={{
+              padding: '0.5rem',
+              borderRadius: '50%',
+              width: '30px',
+              height: '30px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: step >= 2 ? '#00b894' : '#ddd',
+              color: step >= 2 ? 'white' : '#333',
+            }}
+          >
+            2
+          </div>
+          <div
+            style={{
+              padding: '0.5rem',
+              borderRadius: '50%',
+              width: '30px',
+              height: '30px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: step >= 3 ? '#00b894' : '#ddd',
+              color: step >= 3 ? 'white' : '#333',
+            }}
+          >
+            3
+          </div>
+        </div>
+
         <div>
           {step === 1 && (
             <>
-              <label>
+              <label style={{ display: 'block', marginBottom: '0.5rem' }}>
                 Offer Type:
-                <select name="offerType" value={formData.offerType} onChange={handleChange}>
+                <select
+                  name="offerType"
+                  value={formData.offerType}
+                  onChange={handleChange}
+                  style={{ width: '100%', padding: '0.5rem', marginBottom: '1rem', border: '1px solid #ddd', borderRadius: '4px' }}
+                >
                   <option value="Employment Offer">Employment Offer</option>
                   <option value="Promotion">Promotion</option>
                   <option value="Part-time">Part-Time</option>
                 </select>
               </label>
-              <label>
-                Company Name:
-                <input type="text" name="companyName" value={formData.companyName} onChange={handleChange} />
-              </label>
-              <label>
-                Company Address:
-                <input type="text" name="companyAddress" value={formData.companyAddress} onChange={handleChange} />
-              </label>
-              <label>
-                Company Website:
-                <input type="text" name="companyWebsite" value={formData.companyWebsite} onChange={handleChange} />
+              <label style={{ display: 'block', marginBottom: '0.5rem' }}>
+                Email:
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  style={{ width: '100%', padding: '0.5rem', marginBottom: '1rem', border: '1px solid #ddd', borderRadius: '4px' }}
+                />
               </label>
             </>
           )}
           {step === 2 && (
             <>
-              <label>
-                Employee Name:
-                <input type="text" name="employeeName" value={formData.employeeName} onChange={handleChange} />
+              <label style={{ display: 'block', marginBottom: '0.5rem' }}>
+                Volunteer Name:
+                <input
+                  type="text"
+                  name="volunteerName"
+                  value={formData.volunteerName}
+                  onChange={handleChange}
+                  style={{ width: '100%', padding: '0.5rem', marginBottom: '1rem', border: '1px solid #ddd', borderRadius: '4px' }}
+                />
               </label>
-              <label>
-                Employee Address:
-                <input type="text" name="employeeAddress" value={formData.employeeAddress} onChange={handleChange} />
+              <label style={{ display: 'block', marginBottom: '0.5rem' }}>
+                Volunteer Email:
+                <input
+                  type="email"
+                  name="volunteerEmail"
+                  value={formData.volunteerEmail}
+                  onChange={handleChange}
+                  style={{ width: '100%', padding: '0.5rem', marginBottom: '1rem', border: '1px solid #ddd', borderRadius: '4px' }}
+                />
               </label>
-              <label>
-                Designation:
-                <input type="text" name="designation" value={formData.designation} onChange={handleChange} />
+              <label style={{ display: 'block', marginBottom: '0.5rem' }}>
+                Project:
+                <input
+                  type="text"
+                  name="project"
+                  value={formData.project}
+                  onChange={handleChange}
+                  style={{ width: '100%', padding: '0.5rem', marginBottom: '1rem', border: '1px solid #ddd', borderRadius: '4px' }}
+                />
+              </label>
+              <label style={{ display: 'block', marginBottom: '0.5rem' }}>
+                Start Date:
+                <input
+                  type="date"
+                  name="startDate"
+                  value={formData.startDate}
+                  onChange={handleChange}
+                  style={{ width: '100%', padding: '0.5rem', marginBottom: '1rem', border: '1px solid #ddd', borderRadius: '4px' }}
+                />
               </label>
             </>
           )}
           {step === 3 && (
             <>
-              <label>
-                Salary:
-                <input type="text" name="salary" value={formData.salary} onChange={handleChange} />
+              <label style={{ display: 'block', marginBottom: '0.5rem' }}>
+                End Date:
+                <input
+                  type="date"
+                  name="endDate"
+                  value={formData.endDate}
+                  onChange={handleChange}
+                  style={{ width: '100%', padding: '0.5rem', marginBottom: '1rem', border: '1px solid #ddd', borderRadius: '4px' }}
+                />
               </label>
-              <label>
-                Joining Date:
-                <input type="date" name="joiningDate" value={formData.joiningDate} onChange={handleChange} />
+              <label style={{ display: 'block', marginBottom: '0.5rem' }}>
+                Working Hours:
+                <input
+                  type="text"
+                  name="workingHours"
+                  value={formData.workingHours}
+                  onChange={handleChange}
+                  style={{ width: '100%', padding: '0.5rem', marginBottom: '1rem', border: '1px solid #ddd', borderRadius: '4px' }}
+                />
               </label>
-            </>
-          )}
-          {step === 4 && (
-            <>
-              <label>
-                Email:
-                <input type="email" name="email" value={formData.email} onChange={handleChange} />
+              <label style={{ display: 'block', marginBottom: '0.5rem' }}>
+                Project Management:
+                <input
+                  type="text"
+                  name="projectManagement"
+                  value={formData.projectManagement}
+                  onChange={handleChange}
+                  style={{ width: '100%', padding: '0.5rem', marginBottom: '1rem', border: '1px solid #ddd', borderRadius: '4px' }}
+                />
+              </label>
+              <label style={{ display: 'block', marginBottom: '0.5rem' }}>
+                Additional Information:
+                <textarea
+                  name="additionalInformation"
+                  value={formData.additionalInformation}
+                  onChange={handleChange}
+                  style={{ width: '100%', padding: '0.5rem', marginBottom: '1rem', border: '1px solid #ddd', borderRadius: '4px' }}
+                />
               </label>
             </>
           )}
         </div>
-        <div style={{ marginTop: '1rem' }}>
-          <button onClick={handleBack} disabled={step === 1}>
+        <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'space-between' }}>
+          <button
+            onClick={handleBack}
+            style={{ padding: '0.5rem 1rem', border: 'none', borderRadius: '4px', backgroundColor: '#b2bec3', color: 'white', cursor: 'pointer', marginRight: '0.5rem' }}
+            disabled={step === 1}
+          >
             Back
           </button>
-          <button onClick={handleNext} disabled={step === 4}>
+          <button
+            onClick={handleNext}
+            style={{ padding: '0.5rem 1rem', border: 'none', borderRadius: '4px', backgroundColor: '#00b894', color: 'white', cursor: 'pointer' }}
+            disabled={step === 3}
+          >
             Next
           </button>
-          {step === 4 && <button onClick={handleSendEmail}>Send Offer Letter</button>}
+          {step === 3 && (
+            <button
+              onClick={handleSendEmail}
+              style={{ padding: '0.5rem 1rem', border: 'none', borderRadius: '4px', backgroundColor: '#00b894', color: 'white', cursor: 'pointer' }}
+            >
+              Send Offer Letter
+            </button>
+          )}
         </div>
       </div>
 
       {/* Right Section - Preview */}
       <div style={{ flex: 2, padding: '2rem' }}>
-        <h2>Offer Letter</h2>
+        <h2 style={{ marginBottom: '1rem' }}>Offer Letter</h2>
         <pre
           style={{
             background: '#f9f9f9',
@@ -157,6 +282,7 @@ function OfferLetterGenerator() {
         </pre>
       </div>
     </div>
+    </>
   );
 }
 
